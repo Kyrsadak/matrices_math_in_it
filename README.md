@@ -178,4 +178,4 @@ Educational project - free to use and modify.
 
 ## Author
 
-Created as a modular matrix computation utility for learning linear algebra algorithms.
+Created by ~Turgunbayev Daulet~ in Inha University in Tashkent and School 21
