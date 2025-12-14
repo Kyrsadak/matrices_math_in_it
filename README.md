@@ -178,4 +178,4 @@ Educational project - free to use and modify.
 
 ## Author
 
-Created by ~Turgunbayev Daulet~ in Inha University in Tashkent and School 21
+Created by `Turgunbayev Daulet` in `Inha University` in Tashkent and `School 21`
