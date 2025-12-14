@@ -12,9 +12,11 @@ void clear_input_buffer(void) {
 int read_int(const char* prompt, int min, int max) {
     int val;
     int result;
+    char buffer[256];
     
     while (1) {
-        printf("%s", prompt);
+        snprintf(buffer, sizeof(buffer), prompt, min, max);
+        printf("%s", buffer);
         result = scanf("%d", &val);
         
         if (result != 1) {
