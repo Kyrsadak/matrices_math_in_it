@@ -3,6 +3,16 @@
 #include "minors.h"
 #include "inverse.h"
 
+void print_number(double num) {
+    if (fabs(num) < EPS) {
+        printf("0\n");
+    } else if (fabs(num - (int)num) < EPS) {
+        printf("%.0f\n", num);
+    } else {
+        printf("%.4f\n", num);
+    }
+}
+
 void print_menu(void) {
     printf("\n=== MATRIX CALCULATOR ===\n");
     printf("1. Calculate Determinant\n");
@@ -40,16 +50,20 @@ int main(void) {
                 double det;
                 if (n == 2) {
                     det = det_2x2(matrix);
-                    printf("\nDeterminant (2x2 formula): %.10f\n", det);
+                    printf("\nDeterminant (2x2 formula): ");
+                    print_number(det);
                 } else if (n == 3) {
                     det = det_sarrus_3x3(matrix);
-                    printf("\nDeterminant (Sarrus rule): %.10f\n", det);
+                    printf("\nDeterminant (Sarrus rule): ");
+                    print_number(det);
                 } else if (n <= 4) {
                     det = det_recursive(matrix, n);
-                    printf("\nDeterminant (recursive): %.10f\n", det);
+                    printf("\nDeterminant (recursive): ");
+                    print_number(det);
                 } else {
                     det = det_lu(matrix, n);
-                    printf("\nDeterminant (LU decomposition): %.10f\n", det);
+                    printf("\nDeterminant (LU decomposition): ");
+                    print_number(det);
                 }
                 
                 if (is_zero(det)) {
@@ -63,7 +77,8 @@ int main(void) {
                 int row = read_int("Enter row index (1-%d): ", 1, n) - 1;
                 int col = read_int("Enter column index (1-%d): ", 1, n) - 1;
                 double minor = minor_at(matrix, n, row, col);
-                printf("\nMinor M[%d][%d] = %.10f\n", row + 1, col + 1, minor);
+                printf("\nMinor M[%d][%d] = ", row + 1, col + 1);
+                print_number(minor);
                 pause_screen();
                 break;
             }
@@ -72,7 +87,8 @@ int main(void) {
                 int row = read_int("Enter row index (1-%d): ", 1, n) - 1;
                 int col = read_int("Enter column index (1-%d): ", 1, n) - 1;
                 double cofactor = cofactor_at(matrix, n, row, col);
-                printf("\nCofactor C[%d][%d] = %.10f\n", row + 1, col + 1, cofactor);
+                printf("\nCofactor C[%d][%d] = ", row + 1, col + 1);
+                print_number(cofactor);
                 pause_screen();
                 break;
             }
@@ -91,8 +107,9 @@ int main(void) {
             case 5: { // Inverse
                 double det = det_lu(matrix, n);
                 if (is_zero(det)) {
-                    printf("\nError: Matrix is singular (det = %.10f)\n", det);
-                    printf("Cannot compute inverse.\n");
+                    printf("\nError: Matrix is singular (det = ");
+                    print_number(det);
+                    printf(")\nCannot compute inverse.\n");
                 } else {
                     printf("\nChoose inversion method:\n");
                     printf("1. Gauss-Jordan\n");
